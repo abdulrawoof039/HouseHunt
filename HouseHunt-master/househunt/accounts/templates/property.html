@@ -1,0 +1,165 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<head>
+    <style>
+        .container {
+            padding-left: 16%;
+           
+        }
+        .row {
+            padding: 2px;
+        }
+        .col {
+            padding-top: 4px;
+        }
+        .card {
+            align-items: center;
+            width: 100%;
+        }
+        .card-img {
+            padding-top: 18%;
+        }
+        .fav {
+            text-align: right;
+        }
+        .filter{
+            margin-left: 20px;
+            margin-top: 50px;
+          
+        }
+        #mesg{
+            color:#ff0088;
+            font-size:200%;
+        }
+        .fle{
+            text-align: center;
+        }
+        #green{
+            background-color: green;
+            color:white;
+            font-weight: 500;
+        }
+        body {
+            background-color: aliceblue;
+        }
+
+    
+
+        .card {
+            width: 100%;
+        }
+        .card-img-top {
+    		object-fit: cover;
+		}
+        .row {
+            padding: 1%;
+        }
+
+        img {
+            height: 50%;
+        }
+        @media screen and (max-width: 600px){
+            .img{
+                width:100px;
+            }
+            .container {
+                padding: 4%;
+                width: 100%;
+            }
+            .col{
+                padding-top: 8px;
+            }
+            .space{
+                padding-top: 25px;
+            }
+            .center{
+                text-align: center;
+            }
+            .ver{
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<a href="{% url 'filters'%}" class="btn btn-info filter">APPLY FILTERS</a>
+<div class="container">
+    <span id="mesg">{{mesg}}</span>
+    <span id="mesg">{{mesg1}}</span>
+    {% for pro in proper %}
+    <br>
+    <div class="card mb-3" style="max-width:800px;">
+        <div class="row no-gutters">
+            <div class="col-md-4 im">
+                <img src="https://dailyalts.com/wp-content/uploads/2021/02/house-4516175_640.jpg" id="img" class="card-img img-fluid" alt="img">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 >Property for {{pro.rentorsale}} </h5>
+                            <b>Location</b>&nbsp:&nbsp{{pro.address2}},{{pro.city}}
+                        </div>
+                        <div class="col ver">
+                            {% if pro.verifiedproperty == "Verified" %}
+                                <span id="green">&nbsp VERIFIED PROPERTY &nbsp</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="table">
+                        <div class="row">
+                            <div class="col">
+                                <b>Type</b>&nbsp:&nbsp{{pro.propertytype}}
+                            </div>
+                            <div class="col">
+                                <b>PropertyAge</b>&nbsp:&nbsp;{{pro.propertyage}} years
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <b>Area</b>&nbsp:&nbsp{{pro.propertysize}} sq.ft
+                            </div>
+                            <div class="col">
+                                {% if pro.floornumber == 0 %}
+                                <b>FloorNumber</b>&nbsp:&nbsp;Ground
+                                {% endif %}
+                                {% if pro.floornumber != 0 %}
+                                <b>FloorNumber</b>&nbsp:&nbsp;{{pro.floornumber}}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <b>Tenants Preferred</b>&nbsp:&nbsp{{pro.tenantspreferred}}
+                            </div>
+                            <div class="col">
+                                {% if pro.rentorsale == "Rent" %}
+                                <b>Rent per month</b>&nbsp:&nbsp;{{pro.money}} /-
+                                {% endif %}
+                                {% if pro.rentorsale == "Sale"  %}
+                                <b>SellingPrice</b>&nbsp:&nbsp;{{pro.money}}/-
+                                {% endif %}
+                            </div>
+                        </div>
+                       
+                        <div class="row fle center">
+                            <div class="col">
+                                <a href="{% url 'reviews' pro.id %}" target="_blank" class="btn btn-info">VEIW REVIEWS</a>
+                            </div>
+                            <div class="col space">
+                                <a href="{% url 'owner_details' pro.id %}"  class="btn btn-info">OWNER DETAILS</a>
+                            </div>
+                            <div class="col space">
+                                <a href="{% url 'property_display' pro.id %}" target="_blank" class="btn btn-info">EXPLORE</a>
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

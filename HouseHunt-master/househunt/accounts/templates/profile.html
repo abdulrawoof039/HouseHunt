@@ -1,0 +1,95 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+	<title>LoginPage</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<style>
+		body {
+			background-image: url("{% static 'Screenshot%202021-06-18%20225204.png' %}");
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-size: cover;
+		}
+
+		.container {
+
+			align-content: center;
+			padding-top: 6%;
+
+		}
+
+		.card {
+			width: 350px;
+			border: none;
+			background-color: rgba(224, 224, 224, 0.96);
+			margin-top: auto;
+			margin-bottom: auto;
+			position: relative;
+			display: flex;
+			flex-direction: column;
+
+		}
+
+		.card-header {
+			border: none;
+		}
+
+		.card-footer {
+			border: none;
+		}
+		.bold{
+			font-weight: 500;
+		}
+		h3 {
+			color: #0099CC;
+		}
+		@media screen and (max-width: 600px){
+			.container{
+				padding-top: 30%;
+			}
+		}
+
+	</style>
+</head>
+<div class="container ">
+	<div class="d-flex justify-content-center h-100">
+
+		<div class="card">
+			<div class="card-header">
+				<h3>My Profile</h3>
+			</div>
+			<div class="card-body">
+				<form method="POST" action="">
+					{% csrf_token %}
+					<div class="form-group">
+						<label class="bold" for="username">Username</label>
+						<input type="text" name="username" class="form-control" value="{{user.username}}" readonly required>
+					</div>
+					<div class="form-group">
+						<label class="bold" for="email">Email</label>
+						<input type="email" name="email" class="form-control" value="{{user.email}}" pattern="^[a-z0-9A-Z.!#$%&'*+/=_{|}~-]+@gmail.com$" oninvalid="setCustomValidity('Format required : abc@gmail.com')" oninput="setCustomValidity('')">
+					</div>
+					<div class="form-group">
+						<label class="bold" for="phone">Phone Number</label>
+						<input type="tel" name="phone" class="form-control" value="{{user.phonenum}}" pattern="[0-9]{10}" required>
+					</div>
+					<div class="form-group">
+						<input type="submit" value="Save Changes" class="btn btn-info float-right ">
+					</div>
+				</form>
+				<div>
+					<p><b>{{mesg}}</b></p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,349 @@
+{% extends 'index.html' %}
+{% block content %}
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .container {
+            padding-top: 45px;
+        }
+        .rating__star,.star1 {
+            font-size: 1.3em;
+            cursor: pointer;
+            color: orange;
+            transition: filter linear .3s;
+        }
+        .star2{
+            font-size: 1.5em;
+            color: orange;
+
+        }
+        .rating__star:hover {
+            filter: drop-shadow(1px 1px 1px gold);
+        }
+        .star {
+            font-size: 1em;
+            cursor: pointer;
+            color: orange;
+            transition: filter linear .3s;
+        }
+        .card-header {
+            text-align: center;
+        }
+        #heading {
+            font-size: 130%;
+            color: #C71585;
+
+        }
+        .card-body {
+            padding-top: 3px;
+            padding-bottom: 7px;
+        }
+        .submit {
+            text-align: right;
+        }
+        .btn{
+            color:white;
+            background-color: dodgerblue;
+        }
+        .btn:hover,
+        .btn:focus,
+        .btn:active{
+            color: #fff;
+        }
+        .headings {
+            font-weight: 500;
+        }
+        .bold {
+            font-weight: 500;
+        }
+        .table {
+            background-color: ghostwhite;
+            border: 2px;
+        }
+        .flex {
+            display: flex;
+            flex-direction: column;
+        }
+        .right {
+            text-align: right;
+        }
+        .padding {
+            padding-top: 0px;
+        }
+        .heading1{
+            font-size: 30px;
+            color:darkblue;
+        }
+        .ratings{
+            background-color: #fff;
+            padding: 3%;
+            border:2px solid;
+            border-color: #f1f1f1;
+        }
+        .side{
+            float: left;
+            width: 15%;
+            margin-top: 2%;
+            color: darkmagenta;
+            font-weight: 500;
+        }
+        .bar{
+            width: 100%;
+            margin-top: 2%;
+        }
+        .bar-container{
+            width: 100%;
+            background-color: #f1f1f1;
+            text-align: center;   
+        }
+        .col-3{
+            padding-top:10px;
+            color: darkmagenta;
+            font-weight: 500;
+        }
+        #mesg{
+            color:green;
+            font-weight: 500;
+        }
+        .bar-5 {width: 0%; height: 18px; background-color: #04AA6D;}
+        .bar-4 {width: 0%; height: 18px; background-color: #2196F3;}
+        .bar-3 {width: 0%; height: 18px; background-color: #00bcd4;}
+        .bar-2 {width: 0%; height: 18px; background-color: #ff9800;}
+        .bar-1 {width: 0%; height: 18px; background-color: #f44336;}
+    </style>
+</head>
+<div class="container">
+    <input type="hidden" value="{{prop.get_stars}}" id="countlist">
+    <input type="hidden" value={{prop.get_totalreviews}} id="totalcount">
+    <div class="row">
+        <div class="col-12">
+            <div class="ratings">
+                <span class="heading1">User Rating</span>&nbsp;&nbsp;&nbsp;
+                {% if prop.get_rating == 0 %}
+                    <i class="star1 far fa-star"></i>
+                    <i class="star1 far fa-star"></i>
+                    <i class="star1 far fa-star"></i>
+                    <i class="star1 far fa-star"></i>
+                    <i class="star1 far fa-star"></i>
+                {% else %}
+                    {% if prop.get_rating > 0  %}
+                        {% if prop.get_rating > 0 and 1 > prop.get_rating %}
+                            <i class="star2 fa fa-star-half-o"></i>
+                        {% else %}
+                            <i class="star1 fas fa-star"></i>
+                        {% endif %}
+                    {% else %}
+                        <i class="star1 far fa-star"></i>
+                    {% endif %}
+                    {% if prop.get_rating > 1 %}
+                        {% if prop.get_rating > 1 and 2 > prop.get_rating %}
+                            <i class="star2 fa fa-star-half-o"></i>
+                        {% else %}
+                            <i class="star1 fas fa-star"></i>
+                        {% endif %}
+                    {% else %}
+                        <i class="star1 far fa-star"></i>
+                    {% endif %}
+                    {% if prop.get_rating > 2 %}
+                        {% if prop.get_rating > 2 and 3 > prop.get_rating %}
+                            <i class="star2 fa fa-star-half-o"></i>
+                        {% else %}
+                            <i class="star1 fas fa-star"></i>
+                        {% endif %}
+                    {% else %}
+                        <i class="star1 far fa-star"></i>
+                    {% endif %}
+                    {% if prop.get_rating > 3 %}
+                        {% if prop.get_rating > 3 and 4 > prop.get_rating %}
+                            <i class="star2 fa fa-star-half-o"></i>
+                        {% else %}
+                            <i class="star1 fas fa-star"></i>
+                        {% endif %}
+                    {% else %}
+                        <i class="star1 far fa-star"></i>
+                    {% endif %}
+                    {% if prop.get_rating > 5 %}
+                        {% if prop.get_rating > 4 and 5 > prop.get_rating %}
+                            <i class="star2 fa fa-star-half-o"></i>
+                        {% else %}
+                            <i class="star1 fas fa-star"></i>
+                        {% endif %}
+                    {% else %}
+                        <i class="star1 far fa-star"></i>
+                    {% endif %}
+                {% endif %}
+                <br>
+                {{prop.get_ratingstr}} out of 5 based on {{prop.get_totalreviews}} reviews
+                <hr style="border:3px solid #f1f1f1">
+                <div class="row">
+                    <div class="col-2 side">
+                        <div>5 star</div>
+                    </div>
+                    <div class="col-7 bar">
+                        <div class="bar-container">
+                        <div class="bar-5" id="bar-5"></div>
+                        </div>
+                    </div>
+                    <div class="col-3" id="t5">
+                    </div>
+                    <div class="col-2 side">
+                        <div>4 star</div>
+                    </div>
+                    <div class="col-7 bar">
+                        <div class="bar-container">
+                        <div class="bar-4" id="bar-4"></div>
+                        </div>
+                    </div>
+                    <div class="col-3" id="t4">
+                    </div>
+                    <div class="col-2 side">
+                        <div>3 star</div>
+                    </div>
+                    <div class="col-7 bar">
+                        <div class="bar-container">
+                        <div class="bar-3" id="bar-3"></div>
+                        </div>
+                    </div>
+                    <div class="col-3" id="t3">
+                    </div>
+                    <div class="col-2 side">
+                        <div>2 star</div>
+                    </div>
+                    <div class="col-7 bar">
+                        <div class="bar-container">
+                        <div class="bar-2" id="bar-2"></div>
+                        </div>
+                    </div>
+                    <div class="col-3" id="t2">
+                    </div>
+                    <div class="col-2 side">
+                        <div>1 star</div>
+                    </div>
+                    <div class="col-7 bar">
+                        <div class="bar-container" id="barcontainer-1">
+                        <div class="bar-1" id="bar-1"></div>
+                        </div>
+                    </div>
+                    <div class="col-3" id="t1">
+                    </div>
+                </div>
+                <br>
+            </div>
+            <br>
+            <div class="notification">
+                <table class="table">
+                    <tbody>
+                        {% for review in prop.reviews.all %}
+                        <tr>
+                            <th scope="row"><i class='fas fa-user-circle' style='font-size:36px;color:grey;'></i></th>
+                            <td>
+                                <div class="container padding">
+                                    <div class="row">
+                                        <div class="col">
+                                            <span class="bold">Posted By : </span>{{review.user.username}}<br><span class="bold">Posted On : </span>{{review.date_added|date:"d-m-Y"}}<br>
+                                        </div>
+                                        <div class="col right">
+                                            {% if review.stars == 0 %}
+                                                <i class="star far fa-star"></i>
+                                                <i class="star far fa-star"></i>
+                                                <i class="star far fa-star"></i>
+                                                <i class="star far fa-star"></i>
+                                                <i class="star far fa-star"></i>
+                                            {% else %}
+                                                {% if review.stars >= 1 %}
+                                                <i class="star fas fa-star"></i>
+                                                {% else %}
+                                                <i class="star far fa-star"></i>
+                                                {% endif %}
+                                                {% if review.stars >= 2 %}
+                                                <i class="star fas fa-star"></i>
+                                                {% else %}
+                                                <i class="star far fa-star"></i>
+                                                {% endif %}
+                                                {% if review.stars >= 3 %}
+                                                <i class="star fas fa-star"></i>
+                                                {% else %}
+                                                <i class="star far fa-star"></i>
+                                                {% endif %}
+                                                {% if review.stars >= 4 %}
+                                                <i class="star fas fa-star"></i>
+                                                {% else %}
+                                                <i class="star far fa-star"></i>
+                                                {% endif %}
+                                                {% if review.stars >= 5 %}
+                                                <i class="star fas fa-star"></i>
+                                                {% else %}
+                                                <i class="star far fa-star"></i>
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <span class="bold">{{review.title}}</span><br>{{review.content}}
+                                </div>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <div class="notifications">
+                            No reviews yet...
+                        </div>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+       
+</div>
+</div>
+<script>
+    const ratingStars = [...document.getElementsByClassName("rating__star")];
+    function executeRating(stars) {
+        const starClassActive = "rating__star fas fa-star";
+        const starClassInactive = "rating__star far fa-star";
+        const starsLength = stars.length;
+        let i;
+        stars.map((star) => {
+            star.onclick = () => {
+                i = stars.indexOf(star);
+                var x = document.getElementById("rating");
+                x.value = i + 1;
+                if (star.className === starClassInactive) {
+                    for (i; i >= 0; --i) stars[i].className = starClassActive;
+                } else {
+                    for (i; i < starsLength; ++i) stars[i].className = starClassInactive;
+                }
+            };
+        });
+    }
+    function stringSplit(){
+        var x = document.getElementById("countlist").value;
+        y=x.substr(1,x.length-2)
+        z=y.split(",")
+        var a=document.getElementById("totalcount").value;
+        console.log(a)
+        r1=parseInt(z[0])
+        r1=((r1/a)*100).toFixed(2)
+        r2=parseInt(z[1])
+        r2=((r2/a)*100).toFixed(2)
+        r3=parseInt(z[2])
+        r3=((r3/a)*100).toFixed(2)
+        r4=parseInt(z[3])
+        r4=((r4/a)*100).toFixed(2)
+        r5=parseInt(z[4])
+        r5=((r5/a)*100).toFixed(2)
+        console.log(z)
+        document.getElementById("bar-1").style.width=r1+"%";
+        document.getElementById("bar-2").style.width=r2+"%";
+        document.getElementById("bar-3").style.width=r3+"%";
+        document.getElementById("bar-4").style.width=r4+"%";
+        document.getElementById("bar-5").style.width=r5+"%";
+        document.getElementById("t1").innerHTML=r1+"%";
+        document.getElementById("t2").innerHTML=r2+"%";
+        document.getElementById("t3").innerHTML=r3+"%";
+        document.getElementById("t4").innerHTML=r4+"%";
+        document.getElementById("t5").innerHTML=r5+"%";
+    }
+    stringSplit();
+    executeRating(ratingStars);
+</script>
+{% endblock %}

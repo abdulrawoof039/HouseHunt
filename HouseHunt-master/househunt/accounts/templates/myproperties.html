@@ -1,0 +1,114 @@
+{% extends 'index.html' %}
+{% block content %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .container{
+            padding-left:16%;
+            padding-top: 50px;
+        }
+        .row{
+           
+            padding: 2px;
+        }
+        .col{
+            padding-top:4px;
+        }
+        .card{
+            align-items: center;
+        }
+        .card-img{
+            padding-top: 18%;
+        }
+        body{
+            background-color:azure;
+        }
+        @media screen and (max-width: 600px){
+            .img{
+                width:100px;
+            }
+            .container {
+                padding: 4%;
+                width: 100%;
+            }
+            .col{
+                padding-top: 8px;
+            }
+            .space{
+                padding-top: 30px;
+            }
+            .center{
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+    <div class="container">
+        {% for pro in property %}
+            <div class="card" style="max-width:800px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4 im">
+                        <img src="https://dailyalts.com/wp-content/uploads/2021/02/house-4516175_640.jpg" class="card-img img-fluid" alt="img" >
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5>Property for {{pro.rentorsale}} </h5>
+                            <b>Location</b>&nbsp:&nbsp{{pro.address2}},{{pro.city}}
+                            <p class="card-text"></p>
+                            <p class="card-text">
+                            <div class="table">
+                                <div class="row">
+                                    <div class="col">
+                                        <b>Type</b>&nbsp:&nbsp{{pro.propertytype}}
+                                    </div>
+                                    <div class="col">
+                                        <b>PropertyAge</b>&nbsp:&nbsp;{{pro.propertyage}} years
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <b>Area</b>&nbsp:&nbsp{{pro.propertysize}} sq.ft
+                                    </div>
+                                    <div class="col">
+                                        {% if pro.floornumber == 0 %}
+                                            <b>FloorNumber</b>&nbsp:&nbsp;Ground
+                                        {% endif %}
+                                        {% if pro.floornumber != 0 %}
+                                            <b>FloorNumber</b>&nbsp:&nbsp;{{pro.floornumber}}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <b>Tenants Preferred</b>&nbsp:&nbsp{{pro.tenantspreferred}} 
+                                    </div>
+                                    <div class="col">
+        
+                                        {% if pro.rentorsale == "Rent" %}
+                                            <b>Rent per month</b>&nbsp:&nbsp;{{pro.money}} /-
+                                        {% endif %}
+                                        {% if pro.rentorsale == "Sale"  %}
+                                            <b>SellingPrice</b>&nbsp:&nbsp;{{pro.money}}/-
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </p>
+                            <p class="card-text">
+                                <div class="row center">
+                                    <div class="col">
+                                        <a href="{% url 'reviewsowner' pro.id %}"  class="btn btn-info">View Reviews</a>
+                                    </div>
+                                    <div class="col space">
+                                        <a href="{% url 'edit_property' pro.id %}" class="btn btn-info success">View/Edit Details</a>
+                                    </div>
+                                </div>
+                            </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+{% endblock %}

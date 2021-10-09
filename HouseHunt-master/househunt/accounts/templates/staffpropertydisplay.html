@@ -1,0 +1,236 @@
+
+{% extends 'index2.html' %}
+{% block content %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .container {
+
+            padding-top: 50px;
+        }
+
+        .col {
+            padding-top: 4px;
+          
+        }
+
+        .cen {
+            text-align: center;
+        }
+
+        .card {
+         
+            width: 100%;
+            border: 1px solid black;
+            margin-bottom: 20px;
+            background-color: #f2f2ff;
+        }
+
+        .row {
+            padding: 2px;
+          
+        }
+
+        .heading {
+            color: #C71585;
+        }
+
+        .fav {
+            text-align: right;
+        }
+        .vide{
+            display: flex;
+            flex-direction: column;
+        }
+        .no{
+            padding-top: 0px;
+            text-align: center;
+        }
+        .widhei{
+            width:80%;
+            height:80%;
+        }
+        #head{
+            color:#000080;
+        }
+        @media screen and (max-width: 600px){
+            .no{
+                text-align: center;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators w-75">
+                {% for i in img %}
+                <li data-target="#carouselExampleIndicators" data-slide-to="{{forloop.counter0}}" class="{% if forloop.counter0 == 0 %}active{% endif %}"></li>
+                {% endfor %}
+            </ol>
+            <div class="carousel-inner">
+                {% for i in img %}
+                <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
+                    <img src="{{i.image.url}}" class="d-block w-100" alt="..." height="400">
+                </div>
+                {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <div class="card d-flex">
+            <div class="card-body ">
+                    
+                        <div class="row">
+                            <div class="col cen">
+                                <h2 class="card-title heading">PROPERTY DETAILS</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h4 id="head">Property for {{pro.rentorsale}} </h4>
+                            </div>
+                        </div>
+                        <p class="card-text">
+                            <div class="row">
+                                <div class="col">
+                        <div class="table">
+                            <div class="row">
+                                <div class="col">
+                                    <b>Type</b>&nbsp:&nbsp{{pro.propertytype}}
+                                </div>
+                                <div class="col">
+                                    <b>PropertyAge</b>&nbsp:&nbsp;{{pro.propertyage}} years
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <b>Area</b>&nbsp:&nbsp{{pro.propertysize}} sq.ft
+                                </div>
+                                <div class="col">
+                                    {% if pro.floornumber == 0 %}
+                                    <b>FloorNumber</b>&nbsp:&nbsp;Ground
+                                    {% endif %}
+                                    {% if pro.floornumber != 0 %}
+                                    <b>FloorNumber</b>&nbsp:&nbsp;{{pro.floornumber}}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <b>Tenants Preferred</b>&nbsp:&nbsp{{pro.tenantspreferred}}
+                                </div>
+                                <div class="col">
+                                    {% if pro.rentorsale == "Rent" %}
+                                    <b>Rent per month</b>&nbsp:&nbsp;{{pro.money}} /-
+                                    {% endif %}
+                                    {% if pro.rentorsale == "Sale"  %}
+                                    <b>SellingPrice</b>&nbsp:&nbsp;{{pro.money}}/-
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <b>TotalRooms</b>&nbsp:&nbsp{{pro.totalrooms}}
+                                </div>
+                                <div class="col">
+                                    <b>Bedrooms</b>&nbsp:&nbsp;{{pro.bedrooms}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <b>Bathrooms</b>&nbsp:&nbsp{{pro.bathrooms}}
+                                </div>
+                                <div class="col">
+                                    <b>Furnishing</b>&nbsp:&nbsp;{{pro.furnishing}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <b>Address</b>&nbsp:&nbsp;{{pro.address}}
+                                </div>
+                                <div class="col">
+                                    <b>Locality</b>&nbsp:&nbsp;{{pro.address2}}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <b>City</b>&nbsp:&nbsp{{pro.city}}
+                                </div>
+                                <div class="col">
+                                    <b>State</b>&nbsp:&nbsp;{{pro.state}}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <b>Pincode</b>&nbsp:&nbsp{{pro.pincode}}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <b>View Location</b>&nbsp:&nbsp <a href={{pro.mapurl}} target="_blank">{{pro.mapurl}}</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <b>Description</b>&nbsp:
+                                <br>
+                                {{pro.description}}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col">
+                                <h4 id="head">Verfication details </h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <b>Verified Property Details</b>&nbsp:&nbsp;{{pro.verifiedpropertydetails}}
+                            </div>
+                            <div class="col">
+                                <b>Verified Images</b>&nbsp:&nbsp{{pro.verifiedimages}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <b>Verified Videos</b>&nbsp:&nbsp;{{pro.verifiedvideos}}
+                            </div>
+                            <div class="col">
+                                <b>Verified Cost</b>&nbsp:&nbsp{{pro.verifiedcost}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <b>Verification Status</b>&nbsp:&nbsp;{{pro.verifiedproperty}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col no">
+                        <div class="vide">
+                        <p style="text-align:center;"><b>Videos:<b></p>
+                        {% for i in vid %}
+                            <video class="widhei" height="300" controls>
+                            <source src="{{i.video.url}}" type="video/mp4">
+                            </video>
+                            <br>
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

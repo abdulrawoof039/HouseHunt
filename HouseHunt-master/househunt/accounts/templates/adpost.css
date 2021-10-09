@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300&family=Lora:ital,wght@1,400;1,500&family=Playfair+Display&display=swap');
+
+* {
+	padding: 0;
+	margin: 1;
+	
+
+}
+
+
+
+
+body {
+	
+	height: auto;
+	 background-color: lightgrey;
+  width: 70%;
+  border: 2px solid black;
+  padding: 50px;
+  margin: 50%;
+	
+	
+}
+
+.sellrent h5,h6 {
+	text-align: left;
+	font-family: 'Fira Sans', sans-serif;
+	font-family: 'Lora', serif;
+	font-family: 'Playfair Display', serif;
+	font-size: 25px;
+	padding: 10px;
+	
+}
+
+.card-text{
+	text-align: left;
+	font-weight: 350;
+}
+

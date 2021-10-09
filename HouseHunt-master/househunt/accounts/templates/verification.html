@@ -1,0 +1,227 @@
+{% extends 'index2.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+			background-image: url('https://ibcindia.co.in/img/addressverification.jpg');
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-size: cover;
+		}
+        .container {
+            margin-top: 55px;
+            width:100%;
+        }
+        .card {
+            width: 500px;
+            opacity: 0.95;
+            background-color: rgba(245, 244, 244,0.99);
+          
+        }
+        
+        #heading {
+            font-size: 150%;
+            color: #C71585;
+
+        }
+        .card-header{
+            text-align: center;
+        }
+        .btn{
+            background-color: dodgerblue;
+            color:white;
+        }
+        .btn:hover,
+        .btn:focus,
+        .btn:active{
+            color: #fff;
+        }
+        .submit{
+            text-align: right;
+        }
+        .space{
+            padding: 4%;;
+        }
+        .mesg{
+            color:green;
+            font-weight: 500;
+            font-size: 120%;
+        }
+        .form-check{
+            padding: 3%;
+        }
+        .form-check-label{
+            font-size: 120%;
+            font-weight: 500;
+            color:indigo;
+        }
+        #status{
+            color:indigo;
+            font-size: 120%;
+            font-weight: 500;
+        }
+        #verified{
+            color: orange;
+            font-size: 120%;
+            font-weight: 500;
+        }
+        @media screen and (max-width: 600px){
+            .container{
+                margin-top: 180px;
+            }
+        }
+
+    </style>
+</head>
+
+<div class="container">
+  
+    <div class="card">
+        <div class="card-header">
+            <span id="heading"><b>VERIFICATION DETAILS</b></span>
+        </div>
+        <div class="card-body">
+            <p class="card-text">
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="vpropertydetails" onchange="toggleCheckbox1(this)" name="vpropertydetails">
+                    <label class="form-check-label" for="propertydetails">
+                      Verified PropertyDetails
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="vimages"onchange="toggleCheckbox2(this)"  name="vimages">
+                    <label class="form-check-label" for="vimages">
+                      Verified Images
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="vvideos" onchange="toggleCheckbox3(this)" name="vvideos">
+                    <label class="form-check-label" for="vvideos">
+                      Verified Videos
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="vcost" onchange="toggleCheckbox4(this)" name="vcost">
+                    <label class="form-check-label" for="vcost">
+                      Verified Cost
+                    </label>
+                </div>
+                <input type="hidden" value={{prop.verifiedpropertydetails}} id="t1" name="t1">
+                <input type="hidden" value={{prop.verifiedimages}} name="t2" id="t2">
+                <input type="hidden" value={{prop.verifiedvideos}} id="t3" name="t3">
+                <input type="hidden" value={{prop.verifiedcost}} id="t4" name="t4">
+                <br>
+                <span id="status">Verification status :</span> <span id="verified">{{prop.verifiedproperty}}</span>
+                <br><br>
+                <span class="mesg">{{mesg}}</span>
+                <span class="mesg">{{mesg1}}</span>
+                <br><br>
+                <div class="row">
+                    <div class="col">
+                        <a href="{% url 'staffproperty' %}" class="btn">GOBACK</a>
+                    </div>
+                    <div class="col submit">
+                        <button type="submit" class="btn">SUBMIT</button>
+                    </div>
+                </div>
+               
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+   function Verfication() {
+        var x1=document.getElementById("t1").value;
+        console.log("hello")
+        if(x1=="No")
+        {
+            console.log(document.getElementById("vpropertydetails"))
+            document.getElementById("vpropertydetails").checked = false;
+        }
+        else
+        {
+            document.getElementById("vpropertydetails").checked = true; 
+        }
+        var x2=document.getElementById("t2").value;
+        console.log(x2)
+        if(x2=="No")
+        {
+            document.getElementById("vimages").checked = false;
+        }
+        else
+        {
+            
+            document.getElementById("vimages").checked = true; 
+        }
+        var x3=document.getElementById("t3").value
+        if(x3=="No")
+        {
+            document.getElementById("vvideos").checked = false;
+        }
+        else
+        {
+            document.getElementById("vvideos").checked = true; 
+        }
+        var x4=document.getElementById("t4").value
+        if(x4=="No")
+        {
+            document.getElementById("vcost").checked = false;
+        }
+        else
+        {
+            document.getElementById("vcost").checked = true; 
+        }
+   } 
+   function toggleCheckbox1(element)
+   {
+        if(element.checked)
+        {
+            document.getElementById("t1").value = "Yes";
+        }
+        else
+        {
+            document.getElementById("t1").value = "No"; 
+        }
+   }
+   function toggleCheckbox2(element)
+   {
+        if(element.checked)
+        {
+            document.getElementById("t2").value = "Yes";
+        }
+        else
+        {
+            document.getElementById("t2").value = "No"; 
+        }
+    
+   }
+   function toggleCheckbox3(element)
+   {
+        if(element.checked)
+        {
+            document.getElementById("t3").value = "Yes";
+        }
+        else
+        {
+            document.getElementById("t3").value = "No"; 
+        }
+   }
+   function toggleCheckbox4(element)
+   {
+        if(element.checked)
+        {
+            document.getElementById("t4").value = "Yes";
+        }
+        else
+        {
+            document.getElementById("t4").value = "No"; 
+        }
+   
+   }
+   Verfication();
+</script>
+{% endblock %}

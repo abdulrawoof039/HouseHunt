@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+html {
+  box-sizing: border-box;
+}
+*,*:before, *:after {
+  box-sizing: inherit;
+}
+.column {
+  float: left;
+  width: 33.3%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 8px;
+}
+.about-section {
+  padding: 40px;
+  text-align: center;
+  background-color: #474e5d;
+  color: white;
+}
+.container {
+  padding: 0 16px;
+}
+.container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.title {
+  color: grey;
+}
+.buttonclass {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  text-decoration: none;
+}
+.buttonclass:hover {
+  background-color: #555;
+}
+.link{
+  text-align: right;
+}
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="about-section">
+  <div class="link">
+    <a href="{% url 'dashboard' %}" style="color:white;">GO BACK TO HOME</a>
+  </div>
+  <h1>About Us</h1>
+  <p>Finding or selling a house is becoming a big task for everyone and here we come with a solution .</p>
+  <p>Househunt.com is the no1 real estate portal in india lauched in july 2021,dedicated to meet every aspect of the consumer needs in the real estate industry.It is a forum where buyers,sellers and renters can exchange information quickly,effectively and inexpensively.At Househunt.com you can advertise a property,search for a property and browse through properties.It is backed by a strong team of 100 employees and a network of 10 offices in inda.</p>
+</div>
+
+<h2 style="text-align:center">Our Team</h2>
+<div class="row">
+  <div class="column">
+    <div class="card">
+      <img src=".jpg" alt="Srirangam Yuktha" style="width:100%">
+      <div class="container">
+        <h2>Yuktha</h2>
+        <p class="title">Managing Director</p>
+        <p>Founder of this company.</p>
+        <p>srirangamyuktha@gmail.com</p>
+        <a href="{% url 'contact' 1 %}"  class="btn buttonclass">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+      <img src=".jpg" alt="Abdul Rawoof" style="width:100%">
+      <div class="container">
+        <h2>Abdul Rawoof</h2>
+        <p class="title">CEO</p>
+        <p>Staying employed in this company over 4 years.</p>
+        <p>abdulrawoof@gmail.com</p>
+        <a href="{% url 'contact' 2 %}"  class="btn buttonclass">Contact</a>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="card">
+      <img src=".jpg" alt="Naveena Sivapuram" style="width:100%">
+      <div class="container">
+        <h2> Naveena</h2>
+        <p class="title">Bussiness Analyst</p>
+        <p>Staying employed in this company over 8 years.</p>
+        <p>naveenasivapuram@gmail.com</p>
+        <a href="{% url 'contact' 3%}"  class="btn buttonclass">Contact</a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

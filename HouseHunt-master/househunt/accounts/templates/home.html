@@ -1,0 +1,133 @@
+<html>
+<head>
+    <title>HomePage</title>
+   
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+    body{
+        height: 100vh;
+        background-color: #9dbcd4;
+    }
+    .container{
+        padding-top: 4%;
+        height: 80%;
+        text-align: center;
+        
+    }
+    
+    .sub 
+    {
+        margin-top:auto;
+        margin-bottom: auto;
+        height: 100%;
+           
+    }
+    .col{
+        text-align: center;
+    }
+    .button {
+            
+            width: 30%;
+            height: 15%;
+            font-size: 20px;
+            min-height: 40px;
+            min-width: 150px;
+            max-height: 110px;
+            font-weight: bold;
+            color: white;
+            background-color: dodgerblue;
+            border-style: none;
+            text-decoration: none;
+    }
+        .btn-primary:hover,
+        .btn-primary:focus,
+        .btn-primary:active,
+        .btn-primary.active,
+        .open>.dropdown-toggle.btn-primary {
+            color: #fff;
+
+        }
+        #heading {
+            font-family: 'Lobster', cursive;
+            padding-top:20px;
+            color: maroon;
+            margin: auto;
+            font-size: 50px;
+        }
+       
+        #head{
+           
+            color:purple;
+        }  
+    @media screen and (max-width: 600px){
+        .row{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+        }
+        #heading{
+            font-size: 30px;
+        }
+        #head{
+            font-size: 30px;
+        }
+        .container{
+            padding-top: 1%;
+        }
+       
+    }
+</style>
+<script>
+    function login(){
+        location.href = "login";
+    }
+    function regiter(){
+        location.href= "register"
+    }
+</script>
+    </head>
+<body>
+    <div id="heading">
+        <div class="col">
+            <p>HOUSE HUNT</p>
+        </div>
+    </div>
+    <div class="container">
+        <table>
+            <tr>
+                <td>
+                    <div class="row sub">
+                        <div class="col">
+                            <img src="https://i0.wp.com/d2u8towkwolubl.cloudfront.net/wp-content/uploads/2019/08/RentalHome.jpg" alt="img"  class="rounded-circle img-fluid">
+                        </div>
+                        <div class="col">
+                            <div>
+                                <h1 id="head">Looking for a property..<br>
+                                    You are at the right place</h1>
+                                    <p></p>
+                            </div>
+                            <button class="button" onclick="login()">LOGIN</button><br><br><br>
+                            <button class="button" onclick="register()">REGISTER</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

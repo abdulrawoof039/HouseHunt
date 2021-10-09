@@ -1,0 +1,218 @@
+{% extends 'index2.html' %}
+{% block content %}
+
+<head>
+    <style>
+        .container{
+            margin-top: 5%;
+        }
+        .row {
+            padding: 2px;
+        }
+        .col {
+            padding-top: 4px;
+        }
+        .card {
+            align-items: center;
+            width: 100%;
+        }
+        .card-img {
+            padding-top: 18%;
+        }
+        .fav {
+            text-align: right;
+        }
+        .filter{
+            margin-left: 20px;
+            margin-top: 50px;
+          
+        }
+        #mesg{
+            color:#ff0088;
+            font-size:200%;
+        }
+        .fle{
+            text-align: center;
+        }
+        #green{
+            background-color: green;
+            color:white;
+            font-weight: 500;
+        }
+        body {
+            background-color: aliceblue;
+        }
+        .card {
+            width: 100%;
+        }
+        .card-img-top {
+    		object-fit: cover;
+		}
+        .row {
+            padding: 1%;
+        }
+
+        img {
+            height: 50%;
+        }
+        .card-header {
+            text-align: center;
+        }
+        #heading {
+            font-size: 130%;
+            color: #C71585;
+
+        }
+        .card-body {
+            padding-top: 3px;
+            padding-bottom: 7px;
+        }
+        .headings{
+            font-weight: 500;
+        }
+        .submit{
+            text-align: right;
+        }
+        .submit:hover,
+        .submit:focus,
+        .submit:active{
+            color: #fff;
+        }
+        @media screen and (max-width: 600px){
+            .img{
+                width:100px;
+            }
+            .container {
+                margin-top: 7%;
+                padding: 4%;
+                width: 100%;
+            }
+            .col{
+                padding-top: 8px;
+            }
+            .space{
+                padding-top: 25px;
+            }
+            .center{
+                text-align: center;
+            }
+            .ver{
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<div class="container">
+   <div class="row">
+    <div class="col-md-3 search">
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="card">
+                <div class="card-header">
+                    <span id="heading"><b>SEARCH BY:</b></span>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                    <div class="form-group">
+                        <label for="username" class="headings">Username:</label>
+                        <input type="text" class="form-control" value="{{username}}" name="username" id="username" placeholder="Enter username">
+                    </div>
+                    <div class="form-group">
+                        <label for="property" class="headings">PropertyID:</label>
+                        <input type="number" min=1 class="form-control" value="{{propertyid}}" name="propertyid" id="propertyid" placeholder="Enter PropertyID">
+                    </div>  
+                    <div class="form-group">
+                        <label for="city" class="headings">City:</label>
+                        <input type="text" class="form-control" value="{{city}}" name="city" id="city" placeholder="Enter City">
+                    </div> 
+                    <br> 
+                    <div class="submit">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    </p>
+                </div>
+            </div>
+        </form>
+     
+    </div>
+       <div class="col">
+        <p id="mesg">{{mesg}}</p>
+    {% for pro in proper %}
+    <br>
+    <div class="card mb-3" style="max-width:800px;">
+        <div class="row no-gutters">
+            <div class="col-md-4 im">
+                <img src="https://dailyalts.com/wp-content/uploads/2021/02/house-4516175_640.jpg" id="img" class="card-img img-fluid" alt="img">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 >Property for {{pro.rentorsale}} </h5>
+                            <b>Location</b>&nbsp:&nbsp{{pro.address2}},{{pro.city}}
+                        </div>
+                        <div class="col ver">
+                            {% if pro.verifiedproperty == "Verified" %}
+                                <span id="green">&nbsp VERIFIED PROPERTY &nbsp</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="table">
+                        <div class="row">
+                            <div class="col">
+                                <b>Type</b>&nbsp:&nbsp{{pro.propertytype}}
+                            </div>
+                            <div class="col">
+                                <b>PropertyAge</b>&nbsp:&nbsp;{{pro.propertyage}} years
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <b>Area</b>&nbsp:&nbsp{{pro.propertysize}} sq.ft
+                            </div>
+                            <div class="col">
+                                {% if pro.floornumber == 0 %}
+                                <b>FloorNumber</b>&nbsp:&nbsp;Ground
+                                {% endif %}
+                                {% if pro.floornumber != 0 %}
+                                <b>FloorNumber</b>&nbsp:&nbsp;{{pro.floornumber}}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <b>Tenants Preferred</b>&nbsp:&nbsp{{pro.tenantspreferred}}
+                            </div>
+                            <div class="col">
+                                {% if pro.rentorsale == "Rent" %}
+                                <b>Rent per month</b>&nbsp:&nbsp;{{pro.money}} /-
+                                {% endif %}
+                                {% if pro.rentorsale == "Sale"  %}
+                                <b>SellingPrice</b>&nbsp:&nbsp;{{pro.money}}/-
+                                {% endif %}
+                            </div>
+                        </div>
+                       
+                        <div class="row fle center">
+                            <div class="col">
+                                <a href="{% url 'verification' pro.id %}" target="_blank" class="btn btn-info">VERIFICATION</a>
+                            </div>
+                            <div class="col ">
+                                <a href="{% url 'owner_details' pro.id %}"  class="btn btn-info">OWNER DETAILS</a>
+                            </div>
+                            <div class="col">
+                                <a href="{% url 'staffproperty_display' pro.id %}" target="_blank" class="btn btn-info">EXPLORE</a>
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+    <div>
+</div>
+{% endblock %}
